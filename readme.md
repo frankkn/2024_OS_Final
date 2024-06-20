@@ -34,11 +34,11 @@ This project implements a multilevel feedback queue (MLFQ) scheduler for an oper
 
 # How to compile and run the test case
 
-$ git clone https://github.com/yourusername/your-repo-name.git
-$ tar -zxf <Compressed-File>
-$ cd nachos-4.0-final/code
-$ make clean
-$ make
-$ cd userprog/
-$ ./nachos -epb ../test/hw2_test1 40 5000 -epb ../test/hw2_test2 80 4000 -d -z
+$ git clone https://github.com/yourusername/your-repo-name.git  
+$ tar -zxf <Compressed-File>  
+$ cd nachos-4.0-final/code  
+$ make clean  
+$ make  
+$ cd userprog/  
+$ ./nachos -epb ../test/hw2_test1 40 5000 -epb ../test/hw2_test2 80 4000 -d -z  
 
