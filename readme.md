@@ -42,3 +42,6 @@ $ make
 $ cd userprog/  
 $ ./nachos -epb ../test/hw2_test1 40 5000 -epb ../test/hw2_test2 80 4000 -d -z  
 
+## Screenshot
+
+<img src="https://github.com/frankkn/2024_OS_Final/screenshot.jpg" width="400" height="150" alt="syslog"/><br/>
