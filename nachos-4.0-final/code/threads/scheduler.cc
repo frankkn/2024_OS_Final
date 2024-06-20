@@ -120,9 +120,8 @@ void Scheduler::ReadyToRun(Thread* thread)
                 << kernel->stats->totalTicks 
                 << "]: Thread [" 
                 << thread->getID() 
-                << "] is inserted into queue L[" 
-                << queueLevel 
-                << "]");
+                << "] is inserted into queue L" 
+                << queueLevel);
     //<TODO>
     thread->setStatus(READY);
 }
@@ -161,9 +160,8 @@ Thread* Scheduler::FindNextToRun()
                     << kernel->stats->totalTicks 
                     << "]: Thread [" 
                     << nextThread->getID() 
-                    << "] is removed from queue L[" 
-                    << queueLevel 
-                    << "]");
+                    << "] is removed from queue L" 
+                    << queueLevel); 
     }
     return nextThread;
     //<TODO>

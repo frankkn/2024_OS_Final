@@ -64,34 +64,30 @@ Alarm::CallBack()
 
     // 3. Check Round Robin
 
-    static int tickCount = 0;
-    tickCount += UserTick; // UserTick == 1
-    if (tickCount >= TimerTicks) { // TimerTicks == 100
-        tickCount = 0;
-        kernel->scheduler->UpdatePriority(); // 1.
-        kernel->currentThread->setRunTime(kernel->currentThread->getRunTime() + TimerTicks); // 2.
-        kernel->currentThread->setRRTime(kernel->currentThread->getRRTime() + TimerTicks); // 2.
+    kernel->scheduler->UpdatePriority(); // 1.
+    kernel->currentThread->setRunTime(kernel->currentThread->getRunTime() + TimerTicks); // 2.
+    kernel->currentThread->setRRTime(kernel->currentThread->getRRTime() + TimerTicks); // 2.
         
-        if (status == IdleMode) {
-            if (!interrupt->AnyFutureInterrupts()) {
-                timer->Disable();    
-            }    
-        } else {
-            if (kernel->currentThread->getPriority() < 50 && kernel->currentThread->getRRTime() >= 200 ) {
-                kernel->currentThread->setRRTime(0);
-                interrupt->YieldOnReturn();
-            }
+    if (status == IdleMode) {
+        if (!interrupt->AnyFutureInterrupts()) {
+            timer->Disable();    
+        }    
+    } else {
+        if (kernel->currentThread->getPriority() < 50 && kernel->currentThread->getRRTime() >= 200 ) {
+            kernel->currentThread->setRRTime(0);
+            interrupt->YieldOnReturn();
         }
     }
+    
 
     //<TODO>
     
-    // if (status == IdleMode) {   // is it time to quit?
-    //     if (!interrupt->AnyFutureInterrupts()) {
-    //         timer->Disable(); // turn off the timer
-    //     }
-    // } else {    // there's someone to preempt
-    //         interrupt->YieldOnReturn();
+     //    if (status == IdleMode) {    // is it time to quit?
+ //        if (!interrupt->AnyFutureInterrupts()) {
+    //        timer->Disable(); // turn off the timer
     // }
+ //    } else {         // there's someone to preempt
+    //    interrupt->YieldOnReturn();
+ //    }
 }
 
