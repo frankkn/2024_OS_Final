@@ -119,7 +119,24 @@ class Thread {
     // 4. set/get RemainingBurstTime
     // 5. set/get RunTime
     // 6. set/get RRTime
+    int getID() const { return ID; }
+    
+    void setPriority(int _Priority) { Priority = _Priority; }
+    int getPriority() const { return Priority; }
+
+    void setWaitTime(int _WaitTime) { WaitTime = _WaitTime; }
+    int getWaitTime() const { return WaitTime; }
+
+    void setRemainingBurstTime(int _RemainingBurstTime) { RemainingBurstTime = _RemainingBurstTime; }
+    int getRemainingBurstTime() const { return RemainingBurstTime; }
+
+    void setRunTime(int _RunTime) { RunTime = _RunTime; }
+    int getRunTime() const { return RunTime; }
+        
+    void setRRTime(int _RRTime) { RRTime = _RRTime; }
+    int getRRTime() const { return RRTime; }
     //<TODO>
+    
 
   private:
     // some of the private data for this class is listed above

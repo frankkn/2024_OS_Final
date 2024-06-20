@@ -217,7 +217,26 @@ Thread::Yield ()
     // 1. Put current_thread in running state to ready state
     // 2. Then, find next thread from ready state to push on running state
     // 3. After resetting some value of current_thread, then context switch
-    kernel->scheduler->Run(nextThread, finishing);
+    kernel->scheduler->ReadyToRun(this); // 1. (Run to Ready?)
+    nextThread = kernel->scheduler->FindNextToRun(); // 2.
+    DEBUG('z', "[UpdateRemainingBurstTime] Tick [" 
+            << kernel->stats->totalTicks 
+            << "]: Thread [" 
+            << kernel->currentThread->getID() 
+            << "] update remaining burst time, from [" 
+            << RemainingBurstTime 
+            << "] - [" 
+            << RunTime 
+            << "], to [" 
+            << RemainingBurstTime - RunTime 
+            << "]");
+    
+    RemainingBurstTime -= RunTime; // 3.
+    RunTime = 0; // 3. 
+    
+    if (nextThread) {
+        kernel->scheduler->Run(nextThread, false); // context switch
+    }
     //<TODO>
 
     (void) kernel->interrupt->SetLevel(oldLevel);
@@ -262,7 +281,21 @@ Thread::Sleep (bool finishing)
     // , and determine finishing on Scheduler::Run(nextThread, finishing), not here.
     // 1. Update RemainingBurstTime
     // 2. Reset some value of current_thread, then context switch
-    kernel->scheduler->Run(nextThread, finishing);
+    DEBUG('z', "[UpdateRemainingBurstTime] Tick [" 
+                << kernel->stats->totalTicks 
+                << "]: Thread [" 
+                << kernel->currentThread->getID() 
+                << "] update remaining burst time, from [" 
+                << RemainingBurstTime 
+                << "] - [" 
+                << RunTime 
+                << "], to [" 
+                << RemainingBurstTime - RunTime 
+                << "]");
+    
+    RemainingBurstTime -= RunTime;
+    RunTime = 0; 
+    kernel->scheduler->Run(nextThread, false);
     //<TODO>
 }
 

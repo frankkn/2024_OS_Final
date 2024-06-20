@@ -37,6 +37,8 @@ class Scheduler {
 	void CheckToBeDestroyed();	// Check if thread that had been
     					// running needs to be deleted
 	void Print();			// Print contents of ready list
+
+    void updateQueuePriority(List<Thread*>* queue, int queueLevel);
     
 	//<REPORT>
 	void UpdatePriority();

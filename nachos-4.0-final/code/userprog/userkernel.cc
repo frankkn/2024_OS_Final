@@ -36,8 +36,11 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 		}
 		//<TODO>
         // Get execfile & its priority & burst time from argv, then save them.
-		else if (strcmp(argv[i], "-epb") == 0) {
-
+		// userprog/nachos -epb test/hw2_test1 40 5000 -epb test/hw2_test2 40 4000 -d z
+        else if (strcmp(argv[i], "-epb") == 0) {
+            execfile[++execfileNum] = argv[++i]; // filename
+            threadPriority[execfileNum] = atoi(argv[++i]); // priority
+            threadRemainingBurstTime[execfileNum] = atoi(argv[++i]); // remaining burst time   			
 	    }
 	    //<TODO>
 	    else if (strcmp(argv[i], "-u") == 0) {
@@ -176,6 +179,8 @@ ForkExecute(Thread *t)
     //<TODO>
     // When Thread t goes to Running state in the first time, its file should be loaded & executed.
     // Hint: This function would not be called until Thread t is on running state.
+    if(!t->space->Load(t->getName())) return;
+    t->space->Execute(t->getName());
     //<TODO>
 }
 
@@ -185,6 +190,14 @@ UserProgKernel::InitializeOneThread(char* name, int priority, int burst_time)
     //<TODO>
     // When each execfile comes to Exec function, Kernel helps to create a thread for it.
     // While creating a new thread, thread should be initialized, and then forked.
+    t[threadNum] = new Thread(name, threadNum); // threadName, threadID
+    t[threadNum]->setPriority(priority); 
+    t[threadNum]->setRemainingBurstTime(burst_time); 
+    
+    t[threadNum]->setWaitTime(0);
+    t[threadNum]->setRunTime(0);
+    t[threadNum]->setRRTime(0);
+    
     t[threadNum]->space = new AddrSpace();
     t[threadNum]->Fork((VoidFunctionPtr) &ForkExecute, (void *)t[threadNum]);
     //<TODO>
