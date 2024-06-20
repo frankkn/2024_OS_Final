@@ -32,7 +32,7 @@ This project implements a multilevel feedback queue (MLFQ) scheduler for an oper
 - To prevent starvation, the priority of a process is increased by 10 if it waits in the queue for more than 400 ticks.
 - This priority update occurs during the next timer alarm interval, ensuring smooth and timely priority adjustments.
 
-# How to compile and run the test case
+## How to compile and run the test case
 
 $ git clone https://github.com/yourusername/your-repo-name.git  
 $ tar -zxf <Compressed-File>  
