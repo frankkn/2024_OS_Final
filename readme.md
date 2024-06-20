@@ -34,7 +34,7 @@ This project implements a multilevel feedback queue (MLFQ) scheduler for an oper
 
 ## How to compile and run the test case
 
-$ git clone https://github.com/frankkn/2024_OS_Final.git 
+$ git clone https://github.com/frankkn/2024_OS_Final.git  
 $ tar -zxf <Compressed-File>  
 $ cd nachos-4.0-final/code  
 $ make clean  
