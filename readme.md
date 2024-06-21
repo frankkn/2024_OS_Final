@@ -45,3 +45,8 @@ $ ./nachos -epb ../test/hw2_test1 40 5000 -epb ../test/hw2_test2 80 4000 -d -z
 ## Screenshot
 
 <img src="https://github.com/frankkn/2024_OS_Final/blob/main/screenshot.jpg" width="800" height="650" alt="syslog"/><br/>
+
+## Demo question
+
+1. How to determine the next thread to run ? (In 'alarm.cc' - 'CallBack()')  
+2. How to update the priority ? (In 'scheduler.cc' - 'updateQueuePriority()')  
